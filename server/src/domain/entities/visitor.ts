@@ -1,6 +1,6 @@
 import { v4 } from 'uuid'
 
-export class Visitor {
+class Visitor {
   private readonly id: string
   private ip: string
   private nickname: string
@@ -11,11 +11,11 @@ export class Visitor {
     this.nickname = nickname
   }
 
-  public static create (nombre: string, ipAddress: string): Visitor {
+  public static create (nickname: string, ip: string): Visitor {
     const id = v4()
-    const ip = ipAddress
-    const nickname = nombre
     const visitor = new Visitor(id, ip, nickname)
     return visitor
   }
 }
+
+export default Visitor
