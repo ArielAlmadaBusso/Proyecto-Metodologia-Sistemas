@@ -16,6 +16,10 @@ class Category {
     const category = new Category(id, Name, Color)
     return category
   }
+
+  public getId(): string {
+    return this.id;
+  }
 }
 
 export default Category
