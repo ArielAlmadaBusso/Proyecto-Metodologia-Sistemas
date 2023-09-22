@@ -16,6 +16,10 @@ class Visitor {
     const visitor = new Visitor(id, ip, nickname)
     return visitor
   }
+
+  public getId(): string {
+    return this.id;
+  }
 }
 
 export default Visitor

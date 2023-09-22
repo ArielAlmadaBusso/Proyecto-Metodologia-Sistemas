@@ -1,4 +1,4 @@
-import Category from "../../domain/entities/category";
+import Category from "../../domain/entities/category"
 
 class CategoryRepository {
     private categories: Category[]
@@ -21,7 +21,7 @@ class CategoryRepository {
     }
 
     public async getAll(): Promise<Category[]> {
-        return this.categories;
+        return this.categories
     }
     
 }
