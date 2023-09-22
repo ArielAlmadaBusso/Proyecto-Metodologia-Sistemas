@@ -31,6 +31,10 @@ class Claim {
     const createdAt = new Date()
     return new Claim(id, owner, title, description, category, location, createdAt, cloneOf)
   }
+
+  public getId(): string {
+    return this.id;
+  }
 }
 
 export default Claim
