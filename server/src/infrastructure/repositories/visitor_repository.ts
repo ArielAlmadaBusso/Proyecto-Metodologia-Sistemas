@@ -20,3 +20,5 @@ class VisitorRepository{
         return visitor ? visitor : null
     }
 }
+
+export default VisitorRepository
