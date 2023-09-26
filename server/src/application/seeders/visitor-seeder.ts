@@ -1,7 +1,7 @@
 import  Visitor  from '../../domain/entities/visitor';
 import visitorRepository from '../../infrastructure/repositories/visitor_repository';
 
-class VisitorSeeder {
+class SeedVisitors {
   private visitors: Array<Visitor> = [];
   
   public constructor() {
@@ -19,4 +19,4 @@ class VisitorSeeder {
   }
 }
 
-export default new VisitorSeeder();
+export default new SeedVisitors();
