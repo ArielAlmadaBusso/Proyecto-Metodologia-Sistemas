@@ -1,22 +1,24 @@
-import { Request, Response } from 'express';
-import CreateCategoryCommand from '../../application/commands/CreateCategoryCommand';
-import CreateCategoryHandler from '../../application/handlers/CreateCategoryHandler';
 
+import Category from '../../domain/entities/category';
+import CategoryRepository from '../../infrastructure/repositories/category_repository';
 
 class GetCategoriesAction {
-    public async run(req: Request, res: Response) {
-        const { name, color } = req.body;
-        try {
-            const command = new CreateCategoryCommand(name, color);
-            const category = await CreateCategoryHandler.execute(command);
+    private categoryRepository: CategoryRepository;
 
-           return res.status(201).json(
-            { message: 'Category created successfully', category }
-            );
+    public constructor(categoryRepository: CategoryRepository) {
+        this.categoryRepository = categoryRepository;
+    }
+
+    public async execute(): Promise<Category[]> {
+        try {
+            const categories = await this.categoryRepository.getAll();
+            return categories;
         } catch (error) {
-            res.status(400).json({ message: error.message });
+            throw new Error('No se pudieron obtener las categorías');
         }
     }
 }
-  
-export default new GetCategoriesAction();
+
+export default GetCategoriesAction;
+
+
