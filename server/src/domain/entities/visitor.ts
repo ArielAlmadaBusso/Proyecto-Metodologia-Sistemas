@@ -11,7 +11,7 @@ class Visitor {
     this.nickname = nickname
   }
 
-  public static create (nickname: string, ip: string): Visitor {
+  public static create (ip: string, nickname: string): Visitor {
     const id = v4()
     const visitor = new Visitor(id, ip, nickname)
     return visitor
