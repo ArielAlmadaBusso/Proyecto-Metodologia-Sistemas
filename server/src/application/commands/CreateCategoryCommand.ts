@@ -1,11 +1,21 @@
-class CreateCategoryCommand {
-  public readonly name: string;
-  public readonly color: string;
+import Category from '../../domain/entities/category';
 
-  constructor(name: string, color: string) {
-    this.name = name;
-    this.color = color;
-  }
+class CreateCategoryCommand {
+    private readonly name: string;
+    private readonly color: string;
+
+    public constructor(name: string, color: string) {
+        this.name = name;
+        this.color = color;
+    }
+
+    public getName(): string {
+        return this.name;
+    }
+
+    public getColor(): string {
+        return this.color;
+    }
 }
 
 export default CreateCategoryCommand;
