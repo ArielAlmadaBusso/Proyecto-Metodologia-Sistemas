@@ -1,6 +1,6 @@
-import { Request, Response } from "express";
-import { likeCommand } from "../../../application/commands/like/likeCommand";
-import likeHandler from "../../../application/handlers/like/likeHandler";
+import { Request, Response } from 'express';
+import  likeCommand from '../../application/commands/like/likeCommand';
+import likeHandler from '../../application/handlers/like/likeHandler';
 
 class likeAction {
   async run(req: Request, res: Response) {
