@@ -1,10 +1,10 @@
-import Like from '../../domain/entities/like';
-import LikeCommand from '../commands/LikeCommand';
+import like from '../../domain/entities/like';
+import likeCommand from '../../application/commands/like/likeCommand';
 
 class LikeHandler {
-    public async execute(command: LikeCommand) {
-        const { ip, nickname } = command;
-        const like = Like.create(ip, nickname);
+    public async execute(command: likeCommand) {
+        const { id, owner, pin } = command;
+        const like = like.create(ip, nickname);
 
         return like;
     }
