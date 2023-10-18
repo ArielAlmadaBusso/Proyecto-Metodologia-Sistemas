@@ -1,19 +1,23 @@
-import Dislike from '../../domain/entities/dislike';
-import DislikeRepository from '../../infrastructure/repositories/dislike_repository';
+import { Request, Response } from 'express';
+import disLikeCommand from '../../application/commands/dislike/disLikeCommand';
+import disLikeHandler from '../../application/handlers/disLike/disLikeHandler';
 
 class DislikeAction {
-    private dislikeRepository: DislikeRepository;
+    async run(req: Request, res: Response) {
+        const { id, owner, pin } = req.body;
 
-    public constructor(dislikeRepository: DislikeRepository) {
-        this.dislikeRepository = dislikeRepository;
-    }
-
-    public async execute(): Promise<Dislike[]> {
         try {
-            const dislikes = await this.dislikeRepository.getAll();
-            return dislikes;
+            const command = new disLikeCommand(id, owner, pin);
+            if (!id || !pin) {
+                return res.status(400).json({ message: 'Indicar ID y PIN' });
+            }
+
+            await disLikeHandler.handler(command);
+
+            return res.status(200).json({ message: "Dislike agregado" });
         } catch (error) {
-            throw new Error('No se pudieron obtener las categorías');
+            const { message } = error as Error;
+            res.status(400).json({ message: message });
         }
     }
 }
