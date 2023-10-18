@@ -1,13 +1,26 @@
-import like from '../../domain/entities/like';
 import likeCommand from '../../application/commands/like/likeCommand';
+import ClaimRepository from "../../infrastructure/repositories/claim_respository";
+import VisitorRepository from "../../infrastructure/repositories/visitor_repository";
 
 class LikeHandler {
-    public async execute(command: likeCommand) {
-        const { id, owner, pin } = command;
-        const like = like.create(ip, nickname);
+    private claimRepository: ClaimRepository;
+    private visitorRepository: VisitorRepository;
 
-        return like;
+    public constructor(claimRepository: ClaimRepository, visitorRepository: VisitorRepository) {
+        this.claimRepository = claimRepository;
+        this.visitorRepository = visitorRepository;
+    }
+
+    public async execute(command: likeCommand) {
+        const { claimId, visitorId } = command;
+
+        const claim = await this.claimRepository.findOneById(claimId);
+        const visitor = await this.visitorRepository.findOneById(visitorId);
+
+        if (claim != null && visitor?.getId() != "0" && visitor?.getPin() != 0) {
+            claim.like();
+        }
     }
 }
 
-export default new LikeHandler();
+export default LikeHandler;
