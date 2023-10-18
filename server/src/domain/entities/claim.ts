@@ -11,6 +11,8 @@ class Claim {
   private location: string
   private createdAt: Date
   private cloneOf: Claim | null
+  private likeCounter: number = 0
+  private dislikeCounter: number = 0
 
   private constructor (id: string, owner: Visitor, title: string, description: string,
     category: Category, location: string, createdAt: Date, cloneof: Claim) {
@@ -33,7 +35,23 @@ class Claim {
   }
 
   public getId(): string {
-    return this.id;
+    return this.id
+  }
+
+  public getLikeCounter(): number {
+    return this.likeCounter
+  }
+
+  public getDislikeCounter(): number {
+    return this.dislikeCounter
+  }
+
+  public like(): void {
+    this.likeCounter++
+  }
+
+  public dislike(): void {
+    this.dislikeCounter++
   }
 }
 
