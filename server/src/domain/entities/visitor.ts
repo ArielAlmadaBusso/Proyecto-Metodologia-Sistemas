@@ -1,24 +1,41 @@
 import { v4 } from 'uuid'
 
 class Visitor {
-  private readonly id: string
+  private id: string
   private ip: string
   private nickname: string
+  private pin: string
 
-  private constructor (id: string, ip: string, nickname: string) {
+  private constructor (id: string, ip: string, nickname: string, pin: string) {
     this.id = id
     this.ip = ip
     this.nickname = nickname
+    this.pin = pin
   }
 
-  public static create (ip: string, nickname: string): Visitor {
-    const id = v4()
-    const visitor = new Visitor(id, ip, nickname)
-    return visitor
+  public static create (ip: string, nickname: string, pin: string): Visitor {
+    return new Visitor(v4(), ip, nickname, pin)
   }
 
-  public getId(): string {
-    return this.id;
+  public getId (): string {
+    return this.id
+  }
+
+  public getIp (): string {
+    return this.ip
+  }
+
+  public getNickname (): string {
+    return this.nickname
+  }
+
+  getPin (): string {
+    return this.pin
+  }
+
+  validatePin (enteredPin: string): boolean {
+    // Comparar el PIN proporcionado con el PIN almacenado en la entidad Visitor
+    return this.pin === enteredPin
   }
 }
 
