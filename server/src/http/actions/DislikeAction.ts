@@ -1,23 +1,25 @@
-import { Request, Response } from 'express';
-import disLikeCommand from '../../application/commands/dislike/disLikeCommand';
-import disLikeHandler from '../../application/handlers/disLike/disLikeHandler';
+import dislikeCommand from '../../application/commands/dislike/dislikeCommand';
+import ClaimRepository from "../../infrastructure/repositories/claim_respository";
+import VisitorRepository from "../../infrastructure/repositories/visitor_repository";
+
 
 class DislikeAction {
-    async run(req: Request, res: Response) {
-        const { id, owner, pin } = req.body;
+    private claimRepository: ClaimRepository;
+    private visitorRepository: VisitorRepository;
 
-        try {
-            const command = new disLikeCommand(id, owner, pin);
-            if (!id || !pin) {
-                return res.status(400).json({ message: 'Indicar ID y PIN' });
-            }
+    public constructor(claimRepository: ClaimRepository, visitorRepository: VisitorRepository) {
+        this.claimRepository = claimRepository;
+        this.visitorRepository = visitorRepository;
+    }
 
-            await disLikeHandler.handler(command);
+    public async execute(command: dislikeCommand) {
+        const { claimId, visitorId } = command;
 
-            return res.status(200).json({ message: "Dislike agregado" });
-        } catch (error) {
-            const { message } = error as Error;
-            res.status(400).json({ message: message });
+        const claim = await this.claimRepository.findOneById(claimId);
+        const visitor = await this.visitorRepository.findOneById(visitorId);
+
+        if (claim != null && visitor?.getId() != "0" && visitor?.getPin() != 0) {
+            claim.dislike();
         }
     }
 }
