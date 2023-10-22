@@ -20,3 +20,5 @@ class ClaimRepository{
         return claim ? claim : null
     }
 }
+
+export default ClaimRepository
