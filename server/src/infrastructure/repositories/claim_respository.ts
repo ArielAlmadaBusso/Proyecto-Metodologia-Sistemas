@@ -1,4 +1,5 @@
 import Claim from "../../domain/entities/claim"
+import Visitor from "../../domain/entities/visitor"
 
 class ClaimRepository{
     private claim: Claim[]
@@ -19,6 +20,14 @@ class ClaimRepository{
         const claim = this.claim.find(a => a.getId() === id)
         return claim ? claim : null
     }
+    
+    public async findLastFiveByVisitor(visitor: Visitor): Promise<Claim[]> {
+        const lastFiveClaims = this.claim
+            .filter(a => a.getOwner().getId() === visitor.getId())
+            .slice(-5);
+        return lastFiveClaims;
+    }
+
 }
 
 export default ClaimRepository
