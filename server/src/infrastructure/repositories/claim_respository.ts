@@ -2,6 +2,9 @@ import Claim from "../../domain/entities/claim"
 import Visitor from "../../domain/entities/visitor"
 
 class ClaimRepository{
+    LastHourOnFire() {
+        throw new Error('Method not implemented.')
+    }
     private claim: Claim[]
 
     public constructor(){
