@@ -1,4 +1,4 @@
-import dislikeCommand from '../../application/commands/dislike/dislikeCommand';
+import dislikeCommand from '../../application/commands/dislikeCommand';
 import ClaimRepository from "../../infrastructure/repositories/claim_respository";
 import VisitorRepository from "../../infrastructure/repositories/visitor_repository";
 
