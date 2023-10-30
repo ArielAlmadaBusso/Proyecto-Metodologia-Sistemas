@@ -1,36 +1,26 @@
 import Claim from "../../domain/entities/claim"
-import Visitor from "../../domain/entities/visitor"
 
-class ClaimRepository{
-    LastHourOnFire() {
-        throw new Error('Method not implemented.')
-    }
-    private claim: Claim[]
+class ClaimRepository {
+  private claims: Claim[]
 
-    public constructor(){
-        this.claim = []
-    }
+  public constructor () {
+    this.claims = []
+  }
 
-    public async save (claim: Claim): Promise<void>{
-        const saveClaim = this.claim.find(a => a.getId() === claim.getId())
-        if(saveClaim){
-            this.claim.splice(this.claim.indexOf(saveClaim),1)
-        }
-        this.claim.push(claim)
+  public async save (claim: Claim): Promise<void> {
+    const saveClaim = this.claims.find(a => a.getId() === claim.getId())
+    if (saveClaim) {
+      this.claims.splice(this.claims.indexOf(saveClaim), 1)
     }
+    this.claims.push(claim)
+  }
 
-    public async findOneById(id:string):Promise<Claim | null>{
-        const claim = this.claim.find(a => a.getId() === id)
-        return claim ? claim : null
-    }
-    
-    public async findLastFiveByVisitor(visitor: Visitor): Promise<Claim[]> {
-        const lastFiveClaims = this.claim
-            .filter(a => a.getOwner().getId() === visitor.getId())
-            .slice(-5);
-        return lastFiveClaims;
-    }
+  public async findOneById (id: string): Promise<Claim | null> {
+    const claim = this.claims.find(a => a.getId() === id)
 
+    return claim || null
+  }
 }
 
-export default ClaimRepository
+export default new ClaimRepository()
+export { ClaimRepository }
