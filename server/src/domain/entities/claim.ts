@@ -53,6 +53,10 @@ class Claim {
   public dislike(): void {
     this.dislikeCounter++
   }
+
+  public getOwner(): Visitor {
+    return this.owner;
+  }
 }
 
 export default Claim
