@@ -1,4 +1,4 @@
-import { Claim } from '../../domain/entities/claim';
+import Claim from '../../domain/entities/claim';
 import CreateClaimCommand from '../commands/CreateClaimCommand';
 import ClaimRepository from '../../infrastructure/repositories/claim_repository';
 
