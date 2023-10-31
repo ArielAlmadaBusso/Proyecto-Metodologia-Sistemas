@@ -1,4 +1,4 @@
-import likeCommand from '../../application/commands/like/likeCommand';
+import likeCommand from '../../application/commands/likeCommand';
 import ClaimRepository from "../../infrastructure/repositories/claim_respository";
 import VisitorRepository from "../../infrastructure/repositories/visitor_repository";
 
