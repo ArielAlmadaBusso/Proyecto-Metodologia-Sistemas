@@ -1,22 +1,23 @@
-import DisLike from '../../domain/entities/disLike';
-
 class CreatedisLikeCommand {
+  public constructor(
+    private claimId: string,
+    private visitorId: string,
+    private pin: string
+  ) {
 
-    
-    private readonly ip;
-    private readonly nickname;
+  }
 
-    public constructor(ip: string, nickname: string) {
-        
-        this.ip = ip;
-        this.nickname = nickname;
-    }
-    
-    public getIp(): string {
-        return this.ip;
-    }
-    public getNickname(): string {
-        return this.nickname;
-    }
+  public getClaimId(): string {
+    return this.claimId;
+  }
+
+  public getVisitorId(): string {
+    return this.visitorId;
+  }
+
+  getPin() {
+    return this.pin;
+  }
 }
+
 export default CreatedisLikeCommand;
