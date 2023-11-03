@@ -38,6 +38,10 @@ class Claim {
     return this.id
   }
 
+  public getCreatedAt(): Date {
+    return this.createdAt
+  }
+
   public getLikeCounter(): number {
     return this.likeCounter
   }
