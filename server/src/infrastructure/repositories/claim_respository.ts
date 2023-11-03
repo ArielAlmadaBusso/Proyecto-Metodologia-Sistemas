@@ -20,6 +20,16 @@ class ClaimRepository {
 
     return claim || null
   }
+
+  public async LastHourOnFire (): Promise<Claim[]> {
+    const oneHourAgo = new Date()
+    oneHourAgo.setHours(oneHourAgo.getHours() - 1)
+
+    return this.claims
+      .filter(claim => claim.getCreatedAt() >= oneHourAgo)
+      .sort((a, b) => b.getLikeCounter() - a.getLikeCounter())
+      .slice(0, 5)
+  }
 }
 
 export default new ClaimRepository()
