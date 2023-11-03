@@ -30,6 +30,10 @@ class ClaimRepository {
       .sort((a, b) => b.getLikeCounter() - a.getLikeCounter())
       .slice(0, 5)
   }
+
+  public async listLastFive(): Promise<Claim[]> {
+      return this.claims.slice(-5);
+  }
 }
 
 export default new ClaimRepository()
