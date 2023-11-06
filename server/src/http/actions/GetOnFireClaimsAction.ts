@@ -1,23 +1,26 @@
-import { Request, Response } from 'express';
-import ClaimRepository from '../../infrastructure/repositories/claim_respository'
+import { Request, Response } from "express";
+import ClaimRepository from '../../infrastructure/repositories/claim_respository';
 
 class GetOnFireClaimsAction {
-    private claimRepository: ClaimRepository;
 
-    constructor(claimRepository: ClaimRepository) {
-        this.claimRepository = claimRepository;
-    }
-
-    public async run(req: Request, res: Response) {
+  constructor(
+    private claimRepository: ClaimRepository,
+  ) {
+  }
+    public async run(_req: Request, res: Response) {
         try {
-            const onFireClaims = await this.claimRepository.LastHourOnFire();
-
-            res.status(200).json(onFireClaims);
+            const lastFiveClaimsOnFire = await this.claimRepository.LastHourOnFire();
+            return res.status(200).json({
+              claims: lastFiveClaimsOnFire.map(c => ({
+                id: c.getId(),
+                title: c.getTitle(),
+                description: c.getDescription(),
+              })),
+            });
         } catch (error) {
-            const { message } = error as Error;
-            res.status(400).json({ message: message });
+            return res.status(500).json({ error: "Error al obtener los ultimos 5 reclamos 'on fire'" });
         }
     }
 }
 
-export default GetOnFireClaimsAction;
+export default new GetOnFireClaimsAction(claimRepository);
