@@ -32,7 +32,8 @@ class ClaimRepository {
   }
 
   public async listLastFive(): Promise<Claim[]> {
-      return this.claims.slice(-5);
+      const listLastFive = this.claims.slice(-5)
+      return listLastFive.reverse() ;
   }
 }
 
