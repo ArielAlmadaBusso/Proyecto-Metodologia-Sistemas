@@ -15,7 +15,7 @@ class Claim {
   private dislikeCounter: number = 0
 
   private constructor (id: string, owner: Visitor, title: string, description: string,
-    category: Category, location: string, createdAt: Date, cloneof: Claim) {
+    category: Category, location: string, createdAt: Date) {
     this.id = id
     this.owner = owner
     this.title = title
@@ -23,15 +23,14 @@ class Claim {
     this.category = category
     this.location = location
     this.createdAt = createdAt
-    this.cloneOf = cloneof
+    this.cloneOf = null
   }
 
   public static create (owner: Visitor, title: string,
-    description: string, category: Category, location: string,
-    cloneOf: Claim): Claim {
+    description: string, category: Category, location: string): Claim {
     const id = v4()
     const createdAt = new Date()
-    return new Claim(id, owner, title, description, category, location, createdAt, cloneOf)
+    return new Claim(id, owner, title, description, category, location, createdAt)
   }
 
   public getId(): string {
