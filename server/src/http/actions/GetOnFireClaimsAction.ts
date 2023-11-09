@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import ClaimRepository from '../../infrastructure/repositories/claim_respository';
+import claimRepository, { ClaimRepository } from '../../infrastructure/repositories/claim_respository';
 
 class GetOnFireClaimsAction {
 
