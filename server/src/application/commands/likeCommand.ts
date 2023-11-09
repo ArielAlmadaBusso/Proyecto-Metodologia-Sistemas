@@ -3,7 +3,6 @@ class LikeCommand {
   private readonly nickname;
 
   public constructor(ip: string, nickname: string) {
-      
       this.ip = ip;
       this.nickname = nickname;
   }
