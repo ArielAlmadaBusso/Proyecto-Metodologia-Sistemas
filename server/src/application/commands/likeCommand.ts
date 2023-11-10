@@ -2,7 +2,7 @@ class LikeCommand {
 
    public constructor(
     private claimId: string,
-    private visitorId: string,
+    private nickname: string,
     private pin: string
   ) {
 
@@ -12,8 +12,8 @@ class LikeCommand {
     return this.claimId;
   }
 
-  public getVisitorId(): string {
-    return this.visitorId;
+  public getNickname(): string {
+    return this.nickname;
   }
 
   getPin() {
