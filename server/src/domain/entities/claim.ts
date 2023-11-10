@@ -80,6 +80,15 @@ class Claim {
   public dislike(): void {
     this.dislikeCounter++
   }
+  
+  public report(originalClaim: Claim) {
+
+    if (this.createdAt.getTime() < originalClaim.createdAt.getTime()) {
+      throw new Error('Original claim is older than duplicated claim');
+    }
+
+    this.cloneOf = originalClaim;
+  }
 }
 
 export default Claim
