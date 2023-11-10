@@ -23,6 +23,7 @@ class Claim {
     location: string,
     createdAt: Date,
   ) {
+
     this.id = id
     this.owner = owner
     this.title = title
@@ -40,6 +41,7 @@ class Claim {
     category: Category,
     location: string,
   ): Claim {
+
     const id = v4()
     const createdAt = new Date()
     return new Claim(id, owner, title, description, category, location, createdAt)
@@ -47,6 +49,34 @@ class Claim {
 
   public getId(): string {
     return this.id
+  }
+
+  public getOwner(): Visitor {
+    return this.owner;
+  }
+  
+  public getTitle(): string {
+    return this.title
+  }
+
+  public getDescription(): string {
+    return this.description
+  }
+
+  public getCategory(): Category {
+    return this.category
+  }
+
+  public getLocation(): string {
+    return this.location
+  }
+
+  public getCloneOf():  Claim | null  {
+    return this.cloneOf
+  }
+
+  public getCreatedAt(): Date {
+    return this.createdAt
   }
 
   public getLikeCounter(): number {
@@ -68,9 +98,14 @@ class Claim {
   public dislike(id: string): void {
     this.dislikes.push(id)
   }
+  
+  public report(originalClaim: Claim) {
 
-  public getOwner(): Visitor {
-    return this.owner;
+    if (this.createdAt.getTime() < originalClaim.createdAt.getTime()) {
+      throw new Error('Original claim is older than duplicated claim');
+    }
+
+    this.cloneOf = originalClaim;
   }
 
   hasVisitorLiked(id: string) {

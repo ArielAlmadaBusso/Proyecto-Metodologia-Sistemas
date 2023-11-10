@@ -11,9 +11,9 @@ class Category {
     this.color = color
   }
 
-  public static create (Name: string, Color: string): Category {
+  public static create (name: string, color: string): Category {
     const id = v4()
-    const category = new Category(id, Name, Color)
+    const category = new Category(id, name, color)
     return category
   }
 
@@ -28,6 +28,7 @@ class Category {
   public getColor() {
     return this.color;
   }
+
 }
 
 export default Category

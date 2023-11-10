@@ -1,4 +1,4 @@
-import CategoryRepository from '../../infrastructure/repositories/category_repository';
+import {CategoryRepository} from '../../infrastructure/repositories/category_repository';
 import CreateCategoryCommand from '../commands/CreateCategoryCommand';
 import Category from '../../domain/entities/category';
 

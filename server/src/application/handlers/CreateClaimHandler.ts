@@ -1,6 +1,6 @@
 import Claim from '../../domain/entities/claim';
 import CreateClaimCommand from '../commands/CreateClaimCommand';
-import ClaimRepository from '../../infrastructure/repositories/claim_repository';
+import { ClaimRepository } from 'infrastructure/repositories/claim_respository';
 
 class CreateClaimHandler {
   private claimRepository: ClaimRepository;
@@ -10,17 +10,15 @@ class CreateClaimHandler {
   }
 
   public async execute(command: CreateClaimCommand): Promise<void> {
-    const { getId, getOwner, getTitle, getDescription, getCategory, getLocation, getCreatedAt, getCloneOf } = command;
-    const id = getId();
+    const {  getOwner, getTitle, getDescription, getCategory, getLocation, getCloneOf } = command;
     const owner = getOwner();
     const title = getTitle(); 
     const description = getDescription();
     const category = getCategory();
     const location = getLocation();
-    const createdAt = getCreatedAt();
-    const cloneOf = getCloneOf();
+    const cloneOf = getCloneOf()
 
-    const claim = Claim.create(id, owner, title, description, category, location, createdAt, cloneOf);
+    const claim = Claim.create( owner, title, description, category, location);
 
     await this.claimRepository.save(claim);
   }

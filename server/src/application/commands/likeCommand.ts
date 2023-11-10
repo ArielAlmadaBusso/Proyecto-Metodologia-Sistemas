@@ -1,4 +1,5 @@
 class LikeCommand {
+
    public constructor(
     private claimId: string,
     private visitorId: string,
@@ -17,7 +18,8 @@ class LikeCommand {
 
   getPin() {
     return this.pin;
-  }
-}
 
-export default LikeCommand;
+  }
+  
+  export default LikeCommand;
+  

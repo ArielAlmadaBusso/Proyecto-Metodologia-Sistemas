@@ -20,6 +20,21 @@ class ClaimRepository {
 
     return claim || null
   }
+
+  public async LastHourOnFire (): Promise<Claim[]> {
+    const oneHourAgo = new Date()
+    oneHourAgo.setHours(oneHourAgo.getHours() - 1)
+
+    return this.claims
+      .filter(claim => claim.getCreatedAt() >= oneHourAgo)
+      .sort((a, b) => b.getLikeCounter() - a.getLikeCounter())
+      .slice(0, 5)
+  }
+
+  public async listLastFive(): Promise<Claim[]> {
+      const listLastFive = this.claims.slice(-5)
+      return listLastFive.reverse() ;
+  }
 }
 
 export default new ClaimRepository()
