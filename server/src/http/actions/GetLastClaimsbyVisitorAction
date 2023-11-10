@@ -1,19 +1,25 @@
-import Visitor from '../../domain/entities/visitor';
-import Claim from '../../domain/entities/claim'; 
-import VisitorRepository from '../../infrastructure/repositories/visitor_repository';
+import {Request, Response} from 'express';
+import claimRepository, {ClaimRepository} from '../../../infrastructure/repositories/claim.repository';
 
 class GetLastClaimsByVisitorAction {
-  public async execute(visitorId: string, numberOfClaims: number): Promise<Claim[]> {
-    const visitor: Visitor | null = await VisitorRepository.findOneById(visitorId);
 
-    if (!visitor) {
-      throw new Error(`Visitor with ID ${visitorId} not found.`);
+  constructor(private claimRepository: ClaimRepository,) {}
+
+  public async run(_req: Request, res: Response) {
+    try {
+      const lastClaims = await this.claimRepository.listLastFive();
+
+      res.status(200).json({
+        claims: lastClaims.map(c => ({
+          id: c.getId(),
+          title: c.getTitle(),
+          description: c.getDescription(),
+        })),
+      });
+    } catch (error) {
+      res.status(500).json({error: 'Error al obtener los últimos reclamos.'});
     }
-
-    const lastClaims: Claim[] = visitor.getClaims().slice(-numberOfClaims);
-
-    return lastClaims;
   }
 }
 
-export default new GetLastClaimsByVisitorAction();
+export default new GetLastClaimsByVisitorAction(claimRepository);
