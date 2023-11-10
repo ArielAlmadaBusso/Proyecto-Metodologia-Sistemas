@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import {CreateVisitorCommand} from '../../application/commands/CreateVisitorCommand'
+import CreateVisitorCommand from '../../application/commands/CreateVisitorCommand'
 import CreateVisitorHandler from '../../application/handlers/CreateVisitorHandler'
 
 class CreateVisitorAction{
