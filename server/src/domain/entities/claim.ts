@@ -1,4 +1,4 @@
-import { v4 } from 'uuid'
+import {v4} from 'uuid'
 import Visitor from './visitor'
 import Category from './category'
 
@@ -11,11 +11,19 @@ class Claim {
   private location: string
   private createdAt: Date
   private cloneOf: Claim | null
-  private likeCounter: number = 0
-  private dislikeCounter: number = 0
+  private likes: string[] = []
+  private dislikes: string[] = []
 
-  private constructor (id: string, owner: Visitor, title: string, description: string,
-    category: Category, location: string, createdAt: Date) {
+  private constructor(
+    id: string,
+    owner: Visitor,
+    title: string,
+    description: string,
+    category: Category,
+    location: string,
+    createdAt: Date,
+  ) {
+
     this.id = id
     this.owner = owner
     this.title = title
@@ -23,11 +31,17 @@ class Claim {
     this.category = category
     this.location = location
     this.createdAt = createdAt
-    this.cloneOf = null
+    this.cloneOf = null;
   }
 
-  public static create (owner: Visitor, title: string,
-    description: string, category: Category, location: string): Claim {
+  public static create(
+    owner: Visitor,
+    title: string,
+    description: string,
+    category: Category,
+    location: string,
+  ): Claim {
+
     const id = v4()
     const createdAt = new Date()
     return new Claim(id, owner, title, description, category, location, createdAt)
@@ -66,19 +80,23 @@ class Claim {
   }
 
   public getLikeCounter(): number {
-    return this.likeCounter
+    return this.likes.length;
   }
 
   public getDislikeCounter(): number {
-    return this.dislikeCounter
+    return this.dislikes.length;
   }
 
-  public like(): void {
-    this.likeCounter++
+  public like(id: string): void {
+    if (this.hasVisitorLiked(id)) {
+      throw new Error('Visitor has already liked this claim.')
+    }
+
+    this.likes.push(id)
   }
 
-  public dislike(): void {
-    this.dislikeCounter++
+  public dislike(id: string): void {
+    this.dislikes.push(id)
   }
   
   public report(originalClaim: Claim) {
@@ -88,6 +106,34 @@ class Claim {
     }
 
     this.cloneOf = originalClaim;
+  }
+
+  hasVisitorLiked(id: string) {
+    return this.likes.includes(id);
+  }
+
+  public getCreatedAt(): Date {
+    return this.createdAt
+  }
+
+  public getTitle() {
+    return this.title;
+  }
+
+  public getDescription() {
+    return this.description;
+  }
+
+  public getCategory() {
+    return this.category;
+  }
+
+  public getLocation() {
+    return this.location;
+  }
+
+  public getClonedOf() {
+    return this.cloneOf;
   }
 }
 

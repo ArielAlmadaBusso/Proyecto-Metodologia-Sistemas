@@ -20,13 +20,15 @@ class Category {
   public getId(): string {
     return this.id;
   }
-  public getName(): string {
+
+  public getName() {
     return this.name;
   }
-  public getColor(): string {
+
+  public getColor() {
     return this.color;
   }
-  
+
 }
 
 export default Category

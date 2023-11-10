@@ -1,23 +1,24 @@
 class LikeCommand {
-  
-    public constructor(ip: string, nickname: string, pin: string) {
-        
-        this.ip = ip;
-        this.nickname = nickname;
-        this.pin = pin;
-        
-    }
-    
-    public getIp(): string {
-        return this.ip;
-    }
-    public getNickname(): string {
-        return this.nickname;
-    }
-    public getPin(): string {
-      return this.pin;
+
+   public constructor(
+    private claimId: string,
+    private visitorId: string,
+    private pin: string
+  ) {
+
   }
-  
+
+  public getClaimId(): string {
+    return this.claimId;
+  }
+
+  public getVisitorId(): string {
+    return this.visitorId;
+  }
+
+  getPin() {
+    return this.pin;
+
   }
   
   export default LikeCommand;
