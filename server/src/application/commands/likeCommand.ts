@@ -20,6 +20,6 @@ class LikeCommand {
     return this.pin;
 
   }
+}
   
   export default LikeCommand;
-  
