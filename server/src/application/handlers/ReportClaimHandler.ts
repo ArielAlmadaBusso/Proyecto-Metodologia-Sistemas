@@ -1,22 +1,21 @@
 import Claim from '../../domain/entities/claim';
-import CreateClaimCommand from '../commands/CreateClaimCommand';
-import { ClaimRepository } from 'infrastructure/repositories/claim_respository';
+import ReportClaimCommand from '../commands/ReportClaimCommand';
+import {ClaimRepository} from 'infrastructure/repositories/claim_respository';
 
-class CreateClaimHandler {
+class ReportClaimHandler {
   private claimRepository: ClaimRepository;
 
   public constructor(claimRepository: ClaimRepository) {
     this.claimRepository = claimRepository;
   }
 
-  public async execute(command: CreateClaimCommand): Promise<void> {
-    const {  getOwner, getTitle, getDescription, getCategory, getLocation, getCloneOf } = command;
+  public async execute(command: ReportClaimCommand): Promise<void> {
+    const {  getOwner, getTitle, getDescription, getCategory, getLocation } = command;
     const owner = getOwner();
     const title = getTitle(); 
     const description = getDescription();
     const category = getCategory();
     const location = getLocation();
-    const cloneOf = getCloneOf()
 
     const claim = Claim.create( owner, title, description, category, location);
 
@@ -24,4 +23,4 @@ class CreateClaimHandler {
   }
 }
 
-export default CreateClaimHandler;
+export default ReportClaimHandler;

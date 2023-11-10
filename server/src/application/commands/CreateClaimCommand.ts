@@ -60,10 +60,7 @@ class CreateClaimCommand {
       public getCreatedAt(): Date {
         return this.createdAt;
       }
-
-      public getCloneOf(): Claim | null  {
-        return this.cloneOf;
-      }
+     
 }
 export default CreateClaimCommand;
     
