@@ -1,6 +1,6 @@
-import { Application } from 'express'
-import CommonRoutes from './common.routes'
-import CreateVisitorAction from 'http/actions/CreateVisitorAction'
+import { Application } from 'express';
+import CommonRoutes from './common.routes';
+import CreateVisitorAction from 'http/actions/CreateVisitorAction';
 
 class VisitorRoutes extends CommonRoutes {
   public constructor (app: Application) {
