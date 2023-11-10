@@ -1,6 +1,5 @@
-
 import Category from '../../domain/entities/category';
-import CategoryRepository from '../../infrastructure/repositories/category_repository';
+import {CategoryRepository} from '../../infrastructure/repositories/category_repository';
 
 class GetCategoriesAction {
     private categoryRepository: CategoryRepository;

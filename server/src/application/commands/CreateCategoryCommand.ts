@@ -1,5 +1,3 @@
-import Category from '../../domain/entities/category';
-
 class CreateCategoryCommand {
     private readonly name: string;
     private readonly color: string;
