@@ -1,6 +1,6 @@
 import Claim from '../../domain/entities/claim';
 import CreateClaimCommand from '../commands/CreateClaimCommand';
-import ClaimRepository from '../../infrastructure/repositories/claim_repository';
+import { ClaimRepository } from 'infrastructure/repositories/claim_respository';
 
 class CreateClaimHandler {
   private claimRepository: ClaimRepository;

@@ -1,7 +1,4 @@
 class LikeCommand {
-    private readonly ip;
-    private readonly nickname;
-    private readonly pin: string;
   
     public constructor(ip: string, nickname: string, pin: string) {
         

@@ -38,6 +38,34 @@ class Claim {
     return this.id
   }
 
+  public getOwner(): Visitor {
+    return this.owner;
+  }
+  
+  public getTitle(): string {
+    return this.title
+  }
+
+  public getDescription(): string {
+    return this.description
+  }
+
+  public getCategory(): Category {
+    return this.category
+  }
+
+  public getLocation(): string {
+    return this.location
+  }
+
+  public getCloneOf():  Claim | null  {
+    return this.cloneOf
+  }
+
+  public getCreatedAt(): Date {
+    return this.createdAt
+  }
+
   public getLikeCounter(): number {
     return this.likeCounter
   }
@@ -52,10 +80,6 @@ class Claim {
 
   public dislike(): void {
     this.dislikeCounter++
-  }
-
-  public getOwner(): Visitor {
-    return this.owner;
   }
 }
 
